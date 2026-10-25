@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSIS Karsakala | Suaramu, Langkah Kami</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scrollProgressBar"></div>
+
+    <!-- Announcement Bar / Running Ticker -->
+    <div class="announcement-bar">
+        <div class="ticker-wrapper">
+            <span class="ticker-tag">INFO KARSAKALA</span>
+            <marquee behavior="scroll" direction="left" scrollamount="6">
+                📢 Kotak Saran Periode Ini Resmi Dibuka! Sampaikan gagasanmu secara anonim & aman. | 🚀 Rapat Pleno Evaluasi Aspirasi diadakan setiap hari Jumat.
+            </marquee>
+        </div>
+    </div>
+
+    <!-- Background Particles -->
+    <div id="particles"></div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="logo-text">
+            KARSAKALA
+        </div>
+
+        <nav id="navMenu">
+            <a href="#home">Beranda</a>
+            <a href="#aspirasi">Aspirasi</a>
+            <a href="#form-aspirasi">Kotak Saran</a>
+            <a href="#tentang">Tentang</a>
+            <a href="#pengurus">Pengurus</a>
+            <a href="#faq">FAQ</a>
+            <button id="openAdminModalNav" class="nav-admin-btn">+ Panel Admin</button>
+        </nav>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">
+            ☰
+        </button>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <p class="small-title">OSIS SMK BM AL-IKHLAS</p>
+                <h1>KARSA<br><span>KALA</span></h1>
+                <h2>SUARAMU,<br>LANGKAH KAMI.</h2>
+                <p class="hero-description">
+                    Sampaikan kritik, saran, ide, dan aspirasi untuk bersama-sama membangun sekolah yang lebih baik.
+                </p>
+                <a href="#aspirasi" class="hero-button">
+                    SAMPAIKAN ASPIRASI <span>→</span>
+                </a>
+            </div>
+
+            <div class="hero-logo" id="logoContainer">
+                <div class="logo-glow"></div>
+                <!-- Gambar logo asli disembunyikan total via CSS/JS, hanya canvas partikel yang aktif -->
+                <img id="logoImg" src="Assets/logo-karsakala.png" alt="Logo OSIS Karsakala">
+                <canvas id="logoShatterCanvas"></canvas>
+            </div>
+        </section>
+
+        <!-- ASPIRASI SECTION -->
+        <section id="aspirasi" class="section">
+            <p class="section-label">YOUR VOICE MATTERS</p>
+            <h2>SUARAMU<br><span>BERARTI.</span></h2>
+            <p class="section-description">
+                Setiap kritik, saran, ide, dan apresiasi dapat menjadi langkah untuk menciptakan perubahan yang lebih baik.
+            </p>
+
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="kritik">Kritik</button>
+                <button class="filter-btn" data-filter="saran">Saran</button>
+                <button class="filter-btn" data-filter="ide">Ide</button>
+                <button class="filter-btn" data-filter="apresiasi">Apresiasi</button>
+            </div>
+
+            <div class="aspirasi-cards">
+                <div class="card" data-category="kritik">
+                    <div class="card-icon">01</div>
+                    <h3>KRITIK</h3>
+                    <p>Sampaikan hal yang perlu diperbaiki secara objektif.</p>
+                </div>
+                <div class="card" data-category="saran">
+                    <div class="card-icon">02</div>
+                    <h3>SARAN</h3>
+                    <p>Berikan masukan positif untuk kemajuan sekolah.</p>
+                </div>
+                <div class="card" data-category="ide">
+                    <div class="card-icon">03</div>
+                    <h3>IDE</h3>
+                    <p>Bagikan ide kreatif & program menarik kepada OSIS.</p>
+                </div>
+                <div class="card" data-category="apresiasi">
+                    <div class="card-icon">04</div>
+                    <h3>APRESIASI</h3>
+                    <p>Berikan apresiasi atas kinerja & hal-hal positif.</p>
+                </div>
+            </div>
+
+            <div id="form-aspirasi" class="form-wrapper">
+                <form id="aspirasiForm" action="https://formspree.io/f/maeenbnv" method="POST">
+                    <div class="form-group">
+                        <label for="nama">Nama (Opsional / Boleh Anonim)</label>
+                        <input type="text" id="nama" name="nama" placeholder="Masukkan nama atau biarkan kosong...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kategori">Kategori Aspirasi</label>
+                        <select id="kategori" name="kategori" required>
+                            <option value="" disabled selected>Pilih Kategori...</option>
+                            <option value="Kritik">Kritik</option>
+                            <option value="Saran">Saran</option>
+                            <option value="Ide">Ide Kreatif</option>
+                            <option value="Apresiasi">Apresiasi</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pesan">Pesan / Aspirasi</label>
+                        <textarea id="pesan" name="pesan" rows="5" placeholder="Tuliskan aspirasimu secara jelas di sini..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        KIRIM ASPIRASI <span>→</span>
+                    </button>
+
+                    <p id="formStatus" class="form-status"></p>
+                </form>
+            </div>
+
+            <div class="extra-elements">
+                <div class="stat-box">
+                    <h4 class="counter" data-target="100">0</h4><span>%</span>
+                    <p>Kerahasiaan Terjamin</p>
+                </div>
+                <div class="stat-box">
+                    <h4 class="counter" data-target="24">0</h4><span>/7</span>
+                    <p>Aspirasi Terbuka</p>
+                </div>
+                <div class="stat-box">
+                    <h4 class="counter" data-target="4">0</h4><span>Bidang</span>
+                    <p>Kategori Masukan</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TENTANG SECTION -->
+        <section id="tentang" class="section about">
+            <p class="section-label">TENTANG KAMI</p>
+            <h2>OSIS<br><span>KARSAKALA</span></h2>
+            <p class="section-description">
+                Wadah aspirasi siswa SMK BM AL-IKHLAS untuk berkolaborasi, berinovasi, dan berkembang bersama.
+            </p>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>VISI</h3>
+                    <p>Mewujudkan OSIS SMK BM AL-IKHLAS sebagai sarana inspirasi, komunikasi, dan eksekusi aspirasi siswa secara inklusif dan solutif.</p>
+                </div>
+                <div class="about-card">
+                    <h3>MISI</h3>
+                    <ul>
+                        <li>Mengakomodasi setiap gagasan dan kendala siswa.</li>
+                        <li>Menciptakan program kerja interaktif dan relevan.</li>
+                        <li>Mempererat kolaborasi antar entitas sekolah.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PENGURUS SECTION -->
+        <section id="pengurus" class="section">
+            <p class="section-label">STRUKTUR ORGANISASI</p>
+            <h2>KINETIK<br><span>TIM KAMI.</span></h2>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="https://via.placeholder.com/300x300/168bff/ffffff?text=Ketua" alt="Ketua OSIS">
+                    </div>
+                    <div class="team-role">Ketua OSIS</div>
+                    <h4>Nama Ketua OSIS</h4>
+                    <p>Memimpin dan menyelaraskan arah perjuangan OSIS Karsakala.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="https://via.placeholder.com/300x300/168bff/ffffff?text=Wakil" alt="Wakil Ketua OSIS">
+                    </div>
+                    <div class="team-role">Wakil Ketua</div>
+                    <h4>Nama Wakil OSIS</h4>
+                    <p>Mengkoordinasikan setiap sekbid dan eksekusi lapangan.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="https://via.placeholder.com/300x300/168bff/ffffff?text=Sekretaris" alt="Sekretaris OSIS">
+                    </div>
+                    <div class="team-role">Sekretaris</div>
+                    <h4>Nama Sekretaris</h4>
+                    <p>Mengelola kelancaran dokumen dan administrasi organisasi.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section id="faq" class="section">
+            <div class="faq-header-flex">
+                <div>
+                    <p class="section-label">FAQ</p>
+                    <h2>PERTANYAAN<br><span>UMUM.</span></h2>
+                </div>
+                <button id="openAdminModalBtn" class="admin-add-faq-btn">+ Admin: Tambah FAQ</button>
+            </div>
+
+            <div class="faq-list" id="faqList">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Apakah aspirasi saya benar-benar rahasia?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ya, kamu bisa menyertakan atau mengosongkan nama (anonim). Identitasmu aman bersama kami.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Berapa lama aspirasi akan diproses?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Setiap aspirasi dievaluasi setiap minggunya dalam rapat rutin pengurus OSIS.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Apakah masukan saya pasti diwujudkan?</span>
+                        <span class="faq-toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Setiap ide & kritik akan dikaji relevansinya untuk disampaikan kepada pihak sekolah.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL PANEL ADMIN -->
+    <div id="adminModal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="closeAdminModal" class="modal-close">&times;</button>
+            <h3>PANEL ADMIN - TAMBAH FAQ</h3>
+            <p class="modal-sub">Masukkan kata sandi admin dan buat FAQ baru.</p>
+
+            <form id="addFaqForm">
+                <div class="form-group">
+                    <label for="adminPassword">Kata Sandi Admin</label>
+                    <input type="password" id="adminPassword" placeholder="Masukkan password admin..." required>
+                </div>
+                <div class="form-group">
+                    <label for="faqQuestionInput">Pertanyaan Baru</label>
+                    <input type="text" id="faqQuestionInput" placeholder="Contoh: Bagaimana cara daftar ekskul?" required>
+                </div>
+                <div class="form-group">
+                    <label for="faqAnswerInput">Jawaban</label>
+                    <textarea id="faqAnswerInput" rows="3" placeholder="Tuliskan jawaban..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">VERIFIKASI & TAMBAH <span>+</span></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tombol Kembali ke Atas -->
+    <button id="backToTop" aria-label="Kembali ke Atas">↑</button>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; OSIS SMK BM AL-IKHLAS - <strong>KARSAKALA</strong></p>
+        <div class="footer-links">
+            <a href="#home">Beranda</a>
+            <a href="#aspirasi">Aspirasi</a>
+            <a href="#tentang">Tentang</a>
+        </div>
+    </footer>
+
+    <script src="Script.js"></script>
+</body>
+</html>
